@@ -35,8 +35,7 @@ def main():
 
     while True:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return
+            if event.type == pygame.QUIT: return
 
         updatable.update(dt)
 
@@ -44,6 +43,11 @@ def main():
             if obj.collision(player): 
                 output = sys.exit("Collision Detected")
                 print(output)
+        for obj in asteroids:
+            for shot in shots:
+                if obj.collision(shot):
+                    shot.kill() 
+                    obj.split()
 
 
         screen.fill("black")
@@ -52,8 +56,6 @@ def main():
 
         pygame.display.flip()
         dt = clock.tick(60)/ 1000 
-
-
 
 if __name__ == "__main__": 
     main()
